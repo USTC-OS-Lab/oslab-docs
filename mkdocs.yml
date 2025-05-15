@@ -2,15 +2,34 @@ site_name: "USTC OS Docs"
 site_description: "中国科学技术大学操作系统课程实验文档"
 site_author: "USTC OS Team"
 
-use_directory_urls: false
+use_directory_urls: true
+
+# Repository
+repo_name: 'oslab-docs'
+repo_url: 'https://github.com/stdlibstring/oslab-docs'
 
 theme:
   name: 'material'
   language: 'zh'
+  palette:
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      # primary: blue
+      # accent: blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: 切换至深色模式
+    - scheme: slate
+      media: "(prefers-color-scheme: dark)"
+      # primary: light blue
+      # accent: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: 切换至浅色模式
 
 markdown_extensions:
   - admonition
-  - markdown_gfm_admonition
+  # - markdown_gfm_admonition
   - pymdownx.details
   - pymdownx.superfences
 
@@ -25,3 +44,5 @@ nav:
     - "Part1 开源鸿蒙初探": ohlab/ohlab-part1.md
     - "Part2 端侧推理应用实现": ohlab/ohlab-part2.md
     - "附录": ohlab/appendix.md
+
+dev_addr: 127.0.0.1:9999

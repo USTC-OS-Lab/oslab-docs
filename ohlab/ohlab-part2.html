@@ -798,7 +798,7 @@ $<span class="w"> </span>wget<span class="w"> </span>https://git.ustc.edu.cn/KON
 </li>
 <li>
 <p>执行编译与安装：
-    在build目录下，执行以下命令：</p>
+    在<code>llama.cpp</code>代码根目录下，执行以下命令：</p>
 <p>a. 首先，编译 llama 库目标：</p>
 <p><div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
 </code></pre></div>
@@ -851,7 +851,7 @@ wget<span class="w"> </span>https://git.ustc.edu.cn/KONC/oh_lab/-/raw/main/llama
     <div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-o<span class="w"> </span>llama-Demo<span class="w"> </span>llama-Demo.cpp<span class="w"> </span><span class="se">\</span>
 -I./llama.cpp/build/install/include<span class="w"> </span><span class="se">\</span>
 -L./llama.cpp/build/install/lib<span class="w"> </span><span class="se">\</span>
--lllama<span class="w"> </span><span class="se">\</span>
+-lllama<span class="w"> </span>-lggml<span class="w"> </span>-lggml-base<span class="w"> </span>-lggml-cpu<span class="w"> </span><span class="se">\</span>
 -std<span class="o">=</span>c++17
 </code></pre></div>
     参数解析：</p>
@@ -859,7 +859,7 @@ wget<span class="w"> </span>https://git.ustc.edu.cn/KONC/oh_lab/-/raw/main/llama
 <li><code>-o llama-Demo</code>: 指定输出可执行文件的名称为llama-Demo。</li>
 <li><code>-I./llama.cpp/build/install/include</code>: 指定头文件的搜索路径(相对路径)。</li>
 <li><code>-L./llama.cpp/build/install/lib</code>: 指定库文件的搜索路径(相对路径)。</li>
-<li><code>-lllama</code>: (小写L) 告诉链接器链接名为llama的库（即libllama.so）。（你可以把<code>-lllama</code>断句为<code>-l</code>和<code>llama</code>，虽然它们必须要连着写。意思是链接（link）llama 库。看到这句话的编译器会自动寻找名字为<code>libllama.so</code>或<code>.a</code>的文件，并从中寻找函数的实现。）</li>
+<li><code>-lllama -lggml -lggml-base -lggml-cpu</code>: (小写L) 告诉链接器链接名为llama,ggml,ggml-base,ggml-cpu的库（即libllama.so等）。（你可以把<code>-lllama</code>断句为<code>-l</code>和<code>llama</code>，虽然它们必须要连着写。意思是链接（link）llama 库。看到这句话的编译器会自动寻找名字为<code>libllama.so</code>或<code>.a</code>的文件，并从中寻找函数的实现。）</li>
 <li><code>-std=c++17</code>: 指定C++标准版本为C++17。</li>
 </ul>
 <blockquote>
@@ -1189,10 +1189,10 @@ build-ohos/install/lib/libllama.so:<span class="w"> </span>ELF<span class="w"> <
 <p>然后，我们运行previewer（参考阶段一），再试试应用功能吧。</p>
 <blockquote>
 <p>注意，运行Previewer需要使用Release版本，即，将下图下拉框改为图中的选项（上面的entry）：</p>
-<p><img src="./assets/image-20250513232313625.png" alt="image-20250513232313625" style="zoom:50%;" /></p>
+<p><img src="./assets/image-20250513232313625.png" alt="image-20250513232313625" style="zoom: 40%;" /></p>
 </blockquote>
 <p>点击"Hello World"，文字变成如下：</p>
-<p><img src="./assets/image-20250513232354639.png" alt="image-20250513232354639" style="zoom:33%;" /></p>
+<p><img src="./assets/image-20250513232354639.png" alt="image-20250513232354639" style="zoom: 33%;" /></p>
 <p>这样我们就成功调用了C++函数啦，欢呼~</p>
 <blockquote>
 <p>我猜读到这里，大部分同学可能仍然很迷茫，我在哪里，我在干什么，这和C++有什么关系。如果这样，助教表示很抱歉。确实，这次实验涉及的背景知识过多，从 Cmake 到库的使用，从交叉编译到移动应用开发，从 OpenHarmony 到 llama.cpp 。助教已经尽力尝试让大家理解发生了什么了，如果没能做到，我们再次表示抱歉。</p>
@@ -1220,17 +1220,20 @@ build-ohos/install/lib/libllama.so:<span class="w"> </span>ELF<span class="w"> <
 <h3 id="322">3.2.2 将交叉编译所需文件复制到项目中</h3>
 <ol>
 <li>在<code>entry/libs</code>文件夹下创建<code>armeabi-v7a</code>文件夹。如下图，你可以右键<code>libs</code>，选择<code>New</code>-&gt;<code>Directory</code>，然后输入文件夹的名字。
-    <img alt="create folder" src="assets/3.2.3/1.png" /></li>
+    <img src="./assets/3.2.3/1.png" alt="create folder" style="zoom: 60%;" /></li>
 <li>
 <p>将 2.3.1 节中，在Ubuntu里交叉编译好的库文件，复制到<code>armeabi-v7a</code>文件夹下。注意，你需要复制<code>llama.cpp/build-ohos/install/libs</code>下所有的<code>.so</code>文件。</p>
 </li>
 <li>
 <p>类似第一步，在<code>entry/src/main/cpp</code>目录下创建<code>include</code>文件夹，将3.1.2中编译得到的头文件（.h文件）复制到该文件夹下。注意，你需要复制<code>llama.cpp/build-ohos/install/include</code>下的所有文件。</p>
 </li>
-<li>构建应用并且在开发板上运行,上面输入框可以输入提示词，效果如下所示：
-<img alt="alt text" src="assets/Llama%E6%95%88%E6%9E%9C.jpg" /></li>
+<li>
+<p>构建应用并且在开发板上运行,上面输入框可以输入提示词，效果如下所示：
+<img src="./assets/Llama效果.jpg" alt="alt text" style="zoom:30%;" /></p>
+</li>
 </ol>
 <blockquote>
+<p>注意：这里运行只能在开发板上运行，不能使用Previewer运行，因为推理过程使用的是真实的硬件（例如CPU），Previewer模拟的硬件环境无法支持。</p>
 <p>这里效果很差，原因是我们为了大家的体验，选用了特别小的Tinystory模型，该模型将会生成一个小故事，如果你对如何运行其他可以使用的模型比较感兴趣，查看附录E即可。</p>
 </blockquote>
 <h3 id="323">3.2.3 代码里做了什么？（可选）</h3>

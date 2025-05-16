@@ -33,6 +33,8 @@
 
 
 
+
+
 > [!IMPORTANT]
 >
 > 助教的话：
@@ -634,11 +636,11 @@ this.message = testNapi.add(2, 3).toString();
 
 > 注意，运行Previewer需要使用Release版本，即，将下图下拉框改为图中的选项（上面的entry）：
 >
-> <img src="./assets/image-20250513232313625.png" alt="image-20250513232313625" style="zoom:50%;" />
+> <img src="./assets/image-20250513232313625.png" alt="image-20250513232313625" style="zoom: 40%;" />
 
 点击"Hello World"，文字变成如下：
 
-<img src="./assets/image-20250513232354639.png" alt="image-20250513232354639" style="zoom:33%;" />
+<img src="./assets/image-20250513232354639.png" alt="image-20250513232354639" style="zoom: 33%;" />
 
 这样我们就成功调用了C++函数啦，欢呼~
 
@@ -672,12 +674,12 @@ this.message = testNapi.add(2, 3).toString();
 ### 3.2.2 将交叉编译所需文件复制到项目中
 
 1. 在`entry/libs`文件夹下创建`armeabi-v7a`文件夹。如下图，你可以右键`libs`，选择`New`->`Directory`，然后输入文件夹的名字。
-    ![create folder](./assets/3.2.3/1.png)
+    <img src="./assets/3.2.3/1.png" alt="create folder" style="zoom: 60%;" />
 2. 将 2.3.1 节中，在Ubuntu里交叉编译好的库文件，复制到`armeabi-v7a`文件夹下。注意，你需要复制`llama.cpp/build-ohos/install/libs`下所有的`.so`文件。
   
 3. 类似第一步，在`entry/src/main/cpp`目录下创建`include`文件夹，将3.1.2中编译得到的头文件（.h文件）复制到该文件夹下。注意，你需要复制`llama.cpp/build-ohos/install/include`下的所有文件。
 6. 构建应用并且在开发板上运行,上面输入框可以输入提示词，效果如下所示：
-![alt text](./assets/Llama效果.jpg)
+<img src="./assets/Llama效果.jpg" alt="alt text" style="zoom:30%;" />
 
 > 这里效果很差，原因是我们为了大家的体验，选用了特别小的Tinystory模型，该模型将会生成一个小故事，如果你对如何运行其他可以使用的模型比较感兴趣，查看附录E即可。
 

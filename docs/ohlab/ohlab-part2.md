@@ -181,8 +181,8 @@ CMake本身不是一个编译器，而是一个构建系统生成器。它读取
 
 
 
-3. 执行编译与安装：
-    在build目录下，执行以下命令：
+2. 执行编译与安装：
+    在`llama.cpp`代码根目录下，执行以下命令：
 
     a. 首先，编译 llama 库目标：
 
@@ -205,7 +205,7 @@ CMake本身不是一个编译器，而是一个构建系统生成器。它读取
 
     > 实际上，`cmake --install build`会让cmake进入`build`目录，然后帮助我们调用`make install`，并添加合适的参数，将编译好的文件复制到指定位置。
 
-4. 查找并验证编译产物：
+3. 查找并验证编译产物：
     编译成功后，libllama.so 文件通常会生成在`llama.cpp/build/install/lib` 目录下。
 
     ``` Bash
@@ -245,14 +245,14 @@ CMake本身不是一个编译器，而是一个构建系统生成器。它读取
     g++ -o llama-Demo llama-Demo.cpp \
     -I./llama.cpp/build/install/include \
     -L./llama.cpp/build/install/lib \
-    -lllama \
+    -lllama -lggml -lggml-base -lggml-cpu \
     -std=c++17
     ```
     参数解析：
     - `-o llama-Demo`: 指定输出可执行文件的名称为llama-Demo。
     - `-I./llama.cpp/build/install/include`: 指定头文件的搜索路径(相对路径)。
     - `-L./llama.cpp/build/install/lib`: 指定库文件的搜索路径(相对路径)。
-    - `-lllama`: (小写L) 告诉链接器链接名为llama的库（即libllama.so）。（你可以把`-lllama`断句为`-l`和`llama`，虽然它们必须要连着写。意思是链接（link）llama 库。看到这句话的编译器会自动寻找名字为`libllama.so`或`.a`的文件，并从中寻找函数的实现。）
+    - `-lllama -lggml -lggml-base -lggml-cpu`: (小写L) 告诉链接器链接名为llama,ggml,ggml-base,ggml-cpu的库（即libllama.so等）。（你可以把`-lllama`断句为`-l`和`llama`，虽然它们必须要连着写。意思是链接（link）llama 库。看到这句话的编译器会自动寻找名字为`libllama.so`或`.a`的文件，并从中寻找函数的实现。）
     - `-std=c++17`: 指定C++标准版本为C++17。
     
     > 从这一步的参数中也可以看出，C/C++中使用第三方库需要两类文件：**头文件**和**库文件**。头文件定义了函数的接口，库文件内存放了函数的实现（机器码）。
@@ -678,9 +678,12 @@ this.message = testNapi.add(2, 3).toString();
 2. 将 2.3.1 节中，在Ubuntu里交叉编译好的库文件，复制到`armeabi-v7a`文件夹下。注意，你需要复制`llama.cpp/build-ohos/install/libs`下所有的`.so`文件。
   
 3. 类似第一步，在`entry/src/main/cpp`目录下创建`include`文件夹，将3.1.2中编译得到的头文件（.h文件）复制到该文件夹下。注意，你需要复制`llama.cpp/build-ohos/install/include`下的所有文件。
-6. 构建应用并且在开发板上运行,上面输入框可以输入提示词，效果如下所示：
+
+4. 构建应用并且在开发板上运行,上面输入框可以输入提示词，效果如下所示：
 <img src="./assets/Llama效果.jpg" alt="alt text" style="zoom:30%;" />
 
+> 注意：这里运行只能在开发板上运行，不能使用Previewer运行，因为推理过程使用的是真实的硬件（例如CPU），Previewer模拟的硬件环境无法支持。
+> 
 > 这里效果很差，原因是我们为了大家的体验，选用了特别小的Tinystory模型，该模型将会生成一个小故事，如果你对如何运行其他可以使用的模型比较感兴趣，查看附录E即可。
 
 

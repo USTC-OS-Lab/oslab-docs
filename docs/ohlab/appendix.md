@@ -153,7 +153,7 @@ AI推理框架是一套专门设计用来简化和优化在各种硬件平台上
    #endif
    
    // 声明库中导出的函数
-   double minus_numbers_in_lib(double a,double b)
+   double minus_numbers_in_lib(double a,double b);
    
    #ifdef __cplusplus
    }

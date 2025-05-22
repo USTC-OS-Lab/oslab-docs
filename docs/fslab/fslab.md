@@ -590,7 +590,7 @@ FAT1偏移地址：保留扇区之后就是FAT1。因此可以得到，FAT1的�
 实验目录树如下所示。`2-simple-fat16-root`和`3-simple-fat16`结构完全相同，只是`simple_fat16.c`的内容不同，所以我们仅以`3-simple-fat`为例介绍：
 
 ```
-fslab
+lab5-code
 ├── 1-fuse-hello
 │   ├── ......
 ├── 2-simple-fat16-root

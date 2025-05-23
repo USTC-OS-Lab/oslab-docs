@@ -1908,7 +1908,7 @@
 <h2 id="_3">实验时间安排</h2>
 <p>注：此处为实验发布时的安排计划，请以课程主页和课程群内最新公告为准</p>
 <ul>
-<li>5月23日晚实验课，讲解实验五并检查实验</li>
+<li>5月23日晚实验课，讲解实验四并检查实验</li>
 <li>5月30日晚实验课，检查实验</li>
 <li>6月6日晚实验课，检查实验</li>
 <li>6月13日晚实验课，检查实验（实验检查截止）</li>
@@ -1949,11 +1949,7 @@ fs --&quot;sector_write&quot;--&gt; img
 <p>为方便大家编写代码和测试，我们将环境配置、代表编译和运行的方法总结如下：</p>
 <p>在编译前，你需要使用<code>apt install</code>安装以下软件包（可能需要<code>sudo</code>权限）：</p>
 <ul>
-<li><code>fuse3</code>, <code>libfuse3-dev</code>, <code>pkg-config</code>, <code>python3</code></li>
-</ul>
-<p>同时，你还需要运行以下命令安装<code>pytest</code></p>
-<ul>
-<li><code>pip install pytest</code></li>
+<li><code>fuse3</code>, <code>libfuse3-dev</code>, <code>pkg-config</code>, <code>python3</code>,<code>python3-pytest</code></li>
 </ul>
 <p>实验代码分为四个目录<code>1-fuse-hello</code>，<code>2-simple-fat16-root</code>，<code>3-simple-fat16</code>和<code>test</code>，前三个目录对应三个阶段的代码，<code>test</code>目录则是用于后两个阶段自动测试的相关代码。</p>
 <h4 id="_8">第一阶段编译和运行</h4>
@@ -2013,8 +2009,7 @@ cat<span class="w"> </span>hi/hello<span class="w"> </span><span class="c1"># �
 <p><strong>更简单地说</strong>，FUSE 能实现什么功能呢？具体来说，它能将对使用 FUSE 挂载的目录的访问（系统调用，如<code>read</code>，<code>write</code>等），转换为对我们代码中的用户态函数的访问（如我们提供的<code>simple_fat16.c</code>代码中的<code>fat16_read</code>和<code>fat16_write</code>函数等 ）。也就是说，我们只要像平时编写用户态 C 程序那样，实现几个接口函数，就可以在不接触内核底层细节（如 VFS等），不重新编译内核的情况下，直接实现并使用一个文件系统了。</p>
 <h3 id="12-fuse">1.2 配置和测试 FUSE 环境</h3>
 <p>linux kernel在2.6.14后添加了FUSE模块，因此对于目前的大多数发行版来说只需要安装libfuse库即可。本实验使用fuse3，请使用以下命令安装libfuse3，和实验需要的其它库：</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libfuse3-dev<span class="w"> </span>pkg-config<span class="w"> </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>fuse3
-pip<span class="w"> </span>install<span class="w"> </span>pytest
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libfuse3-dev<span class="w"> </span>pkg-config<span class="w"> </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>fuse3<span class="w"> </span>python3-pytest
 </code></pre></div>
 <p>本次实验在<code>1-fuse-hello</code>目录下提供了<code>hello.c</code>，该文件使用 FUSE 实现了一个简单的只读的文件系统，文件系统下只有一个 hello 文件，可以用于测试 fuse 是否正确安装。测试方法如下（在<code>1-fuse-hello</code>目录下运行）：</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>hello<span class="w"> </span><span class="c1"># 编译 hello 文件系统</span>

@@ -22,7 +22,7 @@
 
 注：此处为实验发布时的安排计划，请以课程主页和课程群内最新公告为准
 
-- 5月23日晚实验课，讲解实验五并检查实验
+- 5月23日晚实验课，讲解实验四并检查实验
 - 5月30日晚实验课，检查实验
 - 6月6日晚实验课，检查实验
 - 6月13日晚实验课，检查实验（实验检查截止）
@@ -73,11 +73,8 @@ fs --"sector_write"--> img
 
 在编译前，你需要使用`apt install`安装以下软件包（可能需要`sudo`权限）：
 
-* `fuse3`, `libfuse3-dev`, `pkg-config`, `python3`
+* `fuse3`, `libfuse3-dev`, `pkg-config`, `python3`,`python3-pytest`
 
-  同时，你还需要运行以下命令安装`pytest`
-
-* `pip install pytest`
 
 实验代码分为四个目录`1-fuse-hello`，`2-simple-fat16-root`，`3-simple-fat16`和`test`，前三个目录对应三个阶段的代码，`test`目录则是用于后两个阶段自动测试的相关代码。
 
@@ -163,8 +160,7 @@ fusermount3 -zu ../test/fat16  # 将../test/fat16换为你挂载的目录
 linux kernel在2.6.14后添加了FUSE模块，因此对于目前的大多数发行版来说只需要安装libfuse库即可。本实验使用fuse3，请使用以下命令安装libfuse3，和实验需要的其它库：
 
 ```bash
-sudo apt install libfuse3-dev pkg-config python3 python3-pip fuse3
-pip install pytest
+sudo apt install libfuse3-dev pkg-config python3 python3-pip fuse3 python3-pytest
 ```
 
 本次实验在`1-fuse-hello`目录下提供了`hello.c`，该文件使用 FUSE 实现了一个简单的只读的文件系统，文件系统下只有一个 hello 文件，可以用于测试 fuse 是否正确安装。测试方法如下（在`1-fuse-hello`目录下运行）：

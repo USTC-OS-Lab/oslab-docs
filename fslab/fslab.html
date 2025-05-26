@@ -2014,9 +2014,9 @@ cat<span class="w"> </span>hi/hello<span class="w"> </span><span class="c1"># �
 <p>本次实验在<code>1-fuse-hello</code>目录下提供了<code>hello.c</code>，该文件使用 FUSE 实现了一个简单的只读的文件系统，文件系统下只有一个 hello 文件，可以用于测试 fuse 是否正确安装。测试方法如下（在<code>1-fuse-hello</code>目录下运行）：</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>hello<span class="w"> </span><span class="c1"># 编译 hello 文件系统</span>
 mkdir<span class="w"> </span>hi<span class="w">   </span><span class="c1"># 建立一个空目录作为挂载点</span>
-./hello<span class="w"> </span>-d<span class="w"> </span>hi<span class="w">  </span><span class="c1"># 运行 hello，挂载至 hi 目录</span>
+./hello<span class="w"> </span>-f<span class="w"> </span>hi<span class="w">  </span><span class="c1"># 运行 hello，挂载至 hi 目录</span>
 </code></pre></div>
-<p>上述程序运行后，在另一个终端同意目录下运行：</p>
+<p>上述程序运行后，在另一个终端同一目录下运行：</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>hi
 <span class="c1"># 输出 hello</span>
 cat<span class="w"> </span>hi/hello<span class="w">         </span>

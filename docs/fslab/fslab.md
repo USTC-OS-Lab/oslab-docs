@@ -168,10 +168,10 @@ sudo apt install libfuse3-dev pkg-config python3 python3-pip fuse3 python3-pytes
 ```bash
 make hello # 编译 hello 文件系统
 mkdir hi   # 建立一个空目录作为挂载点
-./hello -d hi  # 运行 hello，挂载至 hi 目录
+./hello -f hi  # 运行 hello，挂载至 hi 目录
 ```
 
-上述程序运行后，在另一个终端同意目录下运行：
+上述程序运行后，在另一个终端同一目录下运行：
 
 ```bash
 ls hi

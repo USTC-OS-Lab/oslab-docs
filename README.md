@@ -28,7 +28,13 @@ mkdocs build
 mkdocs serve -a localhost:8000   # 可将8000改为其它端口
 ```
 
+## 发布
 
+目前网站存放在 github.io 中，使用以下命令可自动更新发布：
+
+```bash
+mkdocs gh-deploy
+```
 
 ## 致谢
 
